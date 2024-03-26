@@ -2,7 +2,7 @@
 
 This is a sample Express API that was built as a take home project for a potential employer.
 
-It requires an API key for the <https://www.fillout.com/> api to be stored in the environment variable.
+It requires an API key for the <https://www.fillout.com/> api to be stored in API_KEY  environment variable.
 
 ## Project Requirements
 
