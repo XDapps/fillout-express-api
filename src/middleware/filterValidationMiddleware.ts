@@ -6,12 +6,15 @@ export const validateFilteredResponsesRequest = celebrate({
 	}),
 	[Segments.QUERY]: Joi.object().keys({
 		// Validate the filters query parameter
-		filters: Joi.string().custom((value, _helpers) => {
+		filters: Joi.string().custom((value, helpers) => {
 			try {
 				JSON.parse(value);
 				return value;
 			} catch (error) {
-				throw new Error('Filters must be a valid JSON string');
+				const message: Joi.LanguageMessages = {
+					base: 'Filters must be a valid JSON string',
+				}
+				helpers.message(message);
 			}
 		}),
 	})
