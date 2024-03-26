@@ -7,7 +7,7 @@ export const getResponses = async (formId: string) => {
 		const url = `${API_BASE_URL}/${formId}/submissions`;
 		const response = await axios.get(url, {
 			headers: {
-				'Authorization': `Bearer ${process.env.API_KEY}` // Assuming your API key is stored in an environment variable named API_KEY
+				'Authorization': `Bearer ${process.env.API_KEY}`
 			}
 		});
 		return response.data;
