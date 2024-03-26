@@ -17,7 +17,6 @@ export class Filter {
 		}
 		return matchFound;
 	}
-	//Receives Array of Objects and Filter Object
 	private static _checkArrayObjectsForMatch(item: Record<string, string | number>[], filter: FilterClauseType): boolean {
 		let matchFound = false;
 		for (let i = 0; i < item.length; i++) {
@@ -27,8 +26,6 @@ export class Filter {
 		}
 		return matchFound;
 	}
-
-	//Receives Object and Filter Object
 	private static _matchesItem(item: Record<string, string | number>, filter: FilterClauseType): boolean {
 		if (!this._hasRequiredKeys(item)) return false;
 		if (item.id !== filter.id) return false;
@@ -39,9 +36,6 @@ export class Filter {
 		}
 		return false;
 	}
-
-
-
 	private static _hasRequiredKeys(itemPasses: Record<string, string | number>): boolean {
 		return itemPasses.hasOwnProperty('id') && itemPasses.hasOwnProperty('value');
 	}

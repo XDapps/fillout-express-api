@@ -9,8 +9,8 @@ export class ResponseFilter {
 		for (let i = 0; i < resultsToFilter.length; i++) {
 			const resultToCheck = resultsToFilter[i] as Record<string, string | number>;
 			let matchesAll = true;
-			for (let i = 0; i < filters.length; i++) {
-				const filter = filters[i];
+			for (let j = 0; j < filters.length; j++) {
+				const filter = filters[j];
 				matchesAll = Filter.matchesObject(resultToCheck, filter);
 				if (!matchesAll) {
 					break;
