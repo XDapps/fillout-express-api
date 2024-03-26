@@ -23,7 +23,7 @@ export const filterController = async (req: Request, res: Response) => {
 			// Return filtered responses
 			res.json(result);
 		} else {
-			res.status(400).send('Invalid Filter Provided. Ensure filters are passed as a JSON string.');
+			res.status(400).send('Invalid Filter Provided. Ensure filters are properly stringified JSON.');
 		}
 	} catch (error) {
 		// Handle errors
