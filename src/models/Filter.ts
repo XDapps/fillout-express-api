@@ -32,7 +32,11 @@ export class Filter {
 		if (typeof item.value === "number") {
 			return this._checkNumberFilter(item.value as number, filter.value as number, filter.condition);
 		} else if (typeof item.value === "string") {
-			return this._checkStringFilter(item.value as string, filter.value as string, filter.condition);
+			if (this._isTimestampValue(item.value)) {
+				return this._checkTimestampFilter(item.value as string, filter.value as string, filter.condition);
+			} else {
+				return this._checkStringFilter(item.value as string, filter.value as string, filter.condition);
+			}
 		}
 		return false;
 	}
@@ -62,6 +66,35 @@ export class Filter {
 			default:
 				return false;
 		}
+	}
+	private static _checkTimestampFilter(itemValue: string, filterValue: string, filterOperator: string): boolean {
+		const itemDate = new Date(itemValue);
+		const filterDate = new Date(filterValue);
+		switch (filterOperator) {
+			case 'equals':
+				return itemDate.getTime() === filterDate.getTime();
+			case 'does_not_equal':
+				return itemDate.getTime() !== filterDate.getTime();
+			case 'greater_than':
+				return itemDate.getTime() > filterDate.getTime();
+			case 'less_than':
+				return itemDate.getTime() < filterDate.getTime();
+			default:
+				return false;
+		}
+	}
+
+	private static _isTimestampValue(value: string): boolean {
+		return this._isValidTime(value) || this._isValidDate(value);
+	}
+
+	private static _isValidDate(date: string): boolean {
+		const dateObj = new Date(date);
+		return !isNaN(dateObj.getTime());
+	}
+	private static _isValidTime(time: string): boolean {
+		const timestampRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z$/;
+		return timestampRegex.test(time);
 	}
 
 }
